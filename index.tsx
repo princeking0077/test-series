@@ -153,9 +153,9 @@ const api = {
     }
 
     try {
-      // Create a timeout promise to fail fast if backend is unreachable (300ms)
+      // Create a timeout promise to handle slow network (10 seconds)
       const timeoutPromise = new Promise((_, reject) => 
-        setTimeout(() => reject(new Error('Request timeout')), 300)
+        setTimeout(() => reject(new Error('Request timeout')), 10000)
       );
 
       const fetchPromise = fetch(`${API_BASE}${endpoint}`, {

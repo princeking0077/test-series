@@ -1,0 +1,11 @@
+# Deny access to sensitive files
+<FilesMatch "\.(php)$">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>
+
+# Allow access to the API files
+<FilesMatch "(admin|auth|students|tests)\.php$">
+    Order Allow,Deny
+    Allow from all
+</FilesMatch>

@@ -1,20 +1,23 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# PharmaSuccess - A React & PHP Online Testing Platform
 
-# Run and deploy your AI Studio app
+This project is a complete online testing application with a React frontend and a PHP backend.
 
-This contains everything you need to run your app locally.
+## !!! IMPORTANT SECURITY WARNING !!!
 
-View your app in AI Studio: https://ai.studio/apps/drive/15VtztOWp4i2VbVXn-0S8f1nebGCTS3WA
+This project is delivered with your database credentials pre-configured in the `backend/config.php` file to ensure it works "out of the box" as requested.
 
-## Run Locally
+**This is a significant security risk.** Storing plaintext passwords in your code is strongly discouraged in a production environment. If your source code is ever exposed, your database will be compromised.
 
-**Prerequisites:**  Node.js
+**Recommended Actions After Deployment:**
 
+1.  **Restrict File Access:** Ensure your web server is configured to prevent web access to the `backend/` directory, except for the `backend/api/` subdirectory. The included `.htaccess` file is designed to do this, but you should verify it works on your Hostinger environment.
+2.  **Move to Environment Variables:** The most secure method for handling credentials is to use environment variables, which are not stored with your code. Please consult Hostinger's documentation on how to set these up for your PHP application.
+3.  **Delete `install.php`:** After you have successfully set up your database, you **must delete the `backend/install.php` file**. Leaving it on your server creates a vulnerability that could allow an attacker to wipe your database.
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+## Backend Setup Instructions
+
+1.  **Upload Files:** Upload all the project files to your Hostinger server's `public_html` directory.
+2.  **Run the Installer:** In your web browser, navigate to the `install.php` script to set up your database. For example: `http://yourdomain.com/backend/install.php`
+3.  **DELETE THE INSTALLER:** Once the installation is complete, **immediately delete the `backend/install.php` file**.
+
+Your backend is now fully configured.
