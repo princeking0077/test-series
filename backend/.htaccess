@@ -1,0 +1,9 @@
+# By default, deny access to all PHP files in this directory
+<FilesMatch "\.php$">
+    Require all denied
+</FilesMatch>
+
+# Explicitly grant access to the API endpoints and the installer
+<FilesMatch "(admin|auth|students|tests|install)\.php$">
+    Require all granted
+</FilesMatch>
