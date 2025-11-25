@@ -153,9 +153,9 @@ const api = {
     }
 
     try {
-      // Create a timeout promise to fail fast if backend is unreachable (300ms)
+      // Create a timeout promise to handle slow network (10 seconds)
       const timeoutPromise = new Promise((_, reject) => 
-        setTimeout(() => reject(new Error('Request timeout')), 300)
+        setTimeout(() => reject(new Error('Request timeout')), 10000)
       );
 
       const fetchPromise = fetch(`${API_BASE}${endpoint}`, {
@@ -170,10 +170,14 @@ const api = {
       if(!response.ok) throw new Error('Network Error');
       const data = await response.json();
       return data;
-    } catch (error) {
-      // Fallback to Mock Data if backend is unreachable or times out
-      console.warn('Backend unavailable/timeout, using mock data for demo:', endpoint);
-      return getMockData(endpoint, method, body ? JSON.stringify(body) : undefined) as ApiResponse<T>;
+    } catch (error: any) {
+      // Don't fall back to Mock Data. Instead, return a proper error.
+      console.error('API request failed:', error);
+      // Construct a standard ApiResponse error object
+      return {
+        success: false,
+        message: `API Error: ${error.message || 'An unknown error occurred.'}`
+      };
     }
   },
   
