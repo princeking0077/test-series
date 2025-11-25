@@ -1,0 +1,11 @@
+# Deny access to sensitive files by default
+<FilesMatch "\.(php)$">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>
+
+# Allow access ONLY to the API files and the installer
+<FilesMatch "(admin|auth|students|tests|install)\.php$">
+    Order Allow,Deny
+    Allow from all
+</FilesMatch>
